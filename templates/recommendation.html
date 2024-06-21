@@ -1,0 +1,89 @@
+{% extends 'customer_navbar.html' %}
+
+{% block title %} Recommendations {% endblock %}
+
+{% block css %}
+<style>
+    h1 {
+        text-align: center;
+        color: black;
+        margin-top: 30px;
+    }
+
+    .car-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        text-align: center;
+        font-size: 18px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .car-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .car-image {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .car-details {
+        margin-top: 15px;
+    }
+
+    .borrow-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .borrow-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Recommended Items</h1>
+    <div class="row">
+        {% if recommended_cars %}
+            {% for car in recommended_cars %}
+            <div class="col-md-4">
+                <div class="car-card">
+                    <img src="{{ car.image.url }}" alt="{{ car.name }}" class="car-image">
+                    <div class="car-details">
+                        <p class="card-text"><b>Status:</b> {{ car.is_available_text }}</p>
+                        <h2>{{ car.name }}</h2>
+                        <p><strong>Category:</strong> {{ car.category }}</p>
+                        <p><strong>Vendor:</strong> {{ car.car_dealer }}</p>
+                        <p><strong>Location:</strong> {{ car.location }}</p>
+                        <p><strong>Rent:</strong> {{ car.rent }} Rs </p>
+                        <p><strong>Capacity:</strong> {{ car.capacity }}</p>
+                    </div>
+                    <form action="/car_rent/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ car.id }}">
+                        <input class="borrow-btn" type="submit" value="Borrow">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col">
+                <h2>No recommendations available at the moment.</h2>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

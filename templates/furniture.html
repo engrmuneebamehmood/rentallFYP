@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Furniture Section{% endblock %}
+{% block css %}
+{% load static %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div>
+        <center><h1 class="display-4 bold-black" style="font-size: 2.3rem;">Rent All</h1>
+        <p class="lead">Furniture Section.</p></center>
+        <hr class="my-4">
+    </div>
+    <div class="row mt-4">
+        {% for furniture, distance, status in furniture_with_distances_and_status %}
+        <div class="col-sm-4 mt-4">
+            <div class="card" style="width: 20rem;">
+                <p class="card-text"><b>Status:</b> {{ status }}</p>
+                <img class="card-img-top" src="/media/{{ furniture.image }}" alt="Card image cap" style="height: 180px;">
+                <div class="card-body">
+
+                    <h5 class="card-title"><b><center>{{furniture.name}}</center></b></h5>
+                    <h6 class="card-text"><b>Vendor:</b> {{furniture.car_dealer}}</h6>
+                    <h6 class="card-text"><b>Location: </b>{{furniture.car_dealer.location}}</h6>
+                    <p class="card-text"><b>Rent:</b> Rs {{furniture.rent}} per day</p>
+                    <p class="card-text"><b>Contact:</b> {{ furniture.car_dealer.phone }}</p>
+                    <p class="card-text"><b>EasyPaisa Number: </b>{{furniture.car_dealer.easypaisa_number}}</p>
+
+                    {% if login %}
+                    <p class="card-text">
+                        <b>
+                            {% if distance < 10 %}
+                                Distance: Same City
+                            {% else %}
+                                Distance: {{ distance }} km
+                            {% endif %}
+                        </b>
+                    </p>
+                    {% endif %}
+
+                    <a href="https://wa.me/{{ furniture.car_dealer.easypaisa_number }}?text=I'm%20interested%20in%20your%20{{furniture.name}}%20for%20rent" target="_blank" class="whatsapp">
+                        <img src="{% static 'images/whatsapp.png' %}" width="80px" />
+                    </a>
+
+                    {% if login %}
+                    <form action="/car_rent/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{furniture.id}}">
+                        <input class="btn btn-dark" type="submit" value="Borrow">
+                    </form>
+                    {% else %}
+                    <a href="{% url 'customer_login' %}" class="btn btn-primary">Login to Borrow</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% include 'footer.html' %}

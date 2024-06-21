@@ -1,0 +1,17 @@
+{% extends 'customer_navbar.html' %}
+
+{% block title %} Order Confirmation {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <center>
+        <h2>Your order has been confirmed</h2>
+        <p>Thank you for your order!</p>
+        <p>Pay through the given Easypaisa number of vendor!</p>
+        <a href="{% url 'customer_homepage' %}" class="btn btn-primary">Back</a>
+    </center>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

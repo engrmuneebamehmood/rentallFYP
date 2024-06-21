@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Customer Login {% endblock %}</title>
+
+    {% load static %}
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=checkbox],
+        input[type=number],
+        input[type=date],
+        input[type=file]{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+        /* Hide arrows in input[type=number] */
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+
+
+
+
+
+        input[type=text]:focus,
+        input[type=password]:focus,
+        input[type=email]:focus,
+        input[type=number]:focus,
+        input[type=date]:focus,
+        input[type=file]:focus{
+            outline: none;
+            border-color: #719ece;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        .container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space items evenly */
+            padding: 16px;
+            max-width: 1200px; /* Adjust maximum width as needed */
+            margin: 0 auto;
+        }
+
+        .left-column {
+            flex: 1; /* Take up remaining space */
+            padding-right: 20px; /* Space between form and details */
+        }
+
+        .right-column {
+            flex: 1; /* Take up remaining space */
+        }
+
+        .navbar {
+            background-color: #00b8a8;
+        }
+
+        .btn {
+            background-color: rgb(10, 82, 239);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #0a52ef;
+        }
+
+        /* Added CSS for checkbox positioning */
+       .checkbox-container {
+
+            align-items: flex-start;
+            margin-top: 0px;
+            margin-bottom: 0px;
+
+        }
+
+ #terms_checkbox {
+            margin-right: 550px; /* Reduce the margin to minimize space between checkbox and label */
+        }
+
+       #terms_checkbox + label {
+    margin-left: 200px; /* Adjust as needed */
+}
+
+
+
+        /* Adjustments for image and details */
+        .car-details {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .car-details img {
+            width: 250px; /* Resized image */
+            height: 350px;
+        }
+
+        .car-details p {
+            margin: 10px 0;
+        }
+
+        /* WhatsApp logo size */
+        .whatsapp img {
+            width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'images/logorentwebsite.png' %}" alt="Logo" style="height:70px;width:60px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-5">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/customer_homepage/">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/see_more">All Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/past_orders/">Past Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/recommendation/">Recommendation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/signout/">Signout</a>
+                </li>
+            </ul>
+            <a href="#" style="text-decoration: none; color: #ffffff; font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome {{ request.user }}</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="left-column">
+        <form class="w3-container" action="/done/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="checkout-form-list">
+                <label for="first_name">Name <span class="required">*</span></label>
+                <input type="text" id="first_name" placeholder="Enter your name" name="first_name" required>
+            </div>
+            <div class="checkout-form-list">
+                <label for="days">How many days?</label>
+                <input type="number" id="days" placeholder="Enter number of days" name="days" required><br><br>
+            </div>
+            <div class="checkout-form-list">
+                <label for="borrow_from">Borrowing From <span class="required">*</span></label>
+                <input type="date" id="borrow_from" name="borrow_from" required>
+            </div>
+            <div class="checkout-form-list">
+                <label for="borrow_to">Borrowing To <span class="required">*</span></label>
+                <input type="date" id="borrow_to" name="borrow_to" required>
+            </div>
+            <div class="checkout-form-list">
+                <label for="card">CNIC Number <span class="required">*</span></label>
+                <input type="number" id="card" placeholder="Enter your CNIC Number" name="card" required>
+            </div>
+
+
+
+            <div class="checkout-form-list">
+        <label for="cnic_front">Upload CNIC Front side Image <span class="required">*</span></label>
+        <input type="file" id="cnic_front" name="cnic_front" accept="image/*" required>
+    </div>
+    <div class="checkout-form-list">
+        <label for="cnic_back">Upload CNIC Back side Image <span class="required">*</span></label>
+        <input type="file" id="cnic_back" name="cnic_back" accept="image/*" required>
+    </div>
+
+
+
+            <div class="checkout-form-list">
+                <label for="phone">Phone <span class="required">*</span></label>
+                <input type="number" id="phone" placeholder="Enter your phone number" name="phone" required>
+            </div>
+
+            <button class="btn" style="color: white; background-color: rgb(10,82,239);" type="submit">Confirm</button><br><br>
+
+            <input type="hidden" value="{{car.id}}" name="id">
+        </form>
+
+        <form class="w3-container" action="{% url 'order_details' %}" method="post">
+
+          {% csrf_token %}
+            <!-- Checkbox for agreeing to terms and conditions -->
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms_checkbox" name="terms_checkbox">
+                <label for="terms_checkbox">I agree to the <a href="{% static 'termsconditions.pdf' %}" target="_blank">Terms and Conditions</a></label>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mt-3" href="{% url 'order_details' %}" data-bind-href="pricing">Pay Now</button>
+        </form>
+    </div>
+
+    <div class="right-column">
+        <div class="car-details">
+            <img src="{{ image_url }}" alt="Car Image">
+            <br>
+            <b>Item: {{ car.name }}</b>
+            <br>
+            <b>Price: Rs {{ cost_per_day }} Rs per day</b><br><br>
+            <p><b>Vendor</b>: {{ car.car_dealer }}</p>
+            <p><b>Vendor's Location</b>: {{ dealer.location }}</p>
+            <p><b>Vendor's Contact</b> : {{ dealer.phone }}</p>
+            <b><p>Pay through Vendor's EasyPaisa Number: {{ dealer.easypaisa_number }}</p></b>
+            <p>Send the receipt of transaction on vendor's WhatsApp</p>
+            <a href="#" onclick="sendWhatsAppMessage(); return false;" class="whatsapp">
+                <img src="{% static '/images/whatsapp.png' %}" alt="WhatsApp Logo" class="whatsapp">
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Your footer -->
+{% include 'footer.html' %}
+
+
+
+<script>
+
+
+
+    function showPaymentDetails(paymentMethod) {
+        var allPaymentDetails = document.getElementsByClassName("payment-details");
+        for (var i = 0; i < allPaymentDetails.length; i++) {
+            allPaymentDetails[i].style.display = "none";
+        }
+        var paymentDetails = document.getElementById("payment_details_" + paymentMethod);
+        if (paymentDetails) {
+            paymentDetails.style.display = "block";
+        }
+    }
+function sendWhatsAppMessage() {
+        // Gather form data
+        var firstName = document.getElementById("first_name").value;
+        var days = document.getElementById("days").value;
+        var card = document.getElementById("card").value;
+        var phone = document.getElementById("phone").value;
+        var carName = "{{ car.name }}"; // Retrieve car name from Django template
+
+        // Construct message
+        var message = "Name: " + firstName + "\n";
+        message += "Number of Days: " + days + "\n";
+        message += "card\: " + card + "\n";
+        message += "Phone: " + phone + "\n";
+        message += "Interested in: " + carName + " for rent";
+
+        // Encode message for URL
+        var encodedMessage = encodeURIComponent(message);
+
+        // Construct WhatsApp URL
+        var whatsappURL = "https://wa.me/{{ dealer.phone }}?text=" + encodedMessage;
+
+        // Open WhatsApp URL in a new tab
+        window.open(whatsappURL, "_blank");
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends 'car_dealer_navbar.html' %}
+{% block title %} Add New Product {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container">
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="row mt-2">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;"> Name</i></label>
+            <input type="text" class="form-control" name="car_name" placeholder="Name of the item">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">City</i></label>
+            <input type="text" class="form-control" name="location" placeholder="City">
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Image</i></label>
+            <input type="file" class="form-control" name="image">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Quantity</i></label>
+            <input type="number" class="form-control" name="capacity" placeholder="Quantity">
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Category</i></label>
+            <select class="form-control" name="category">
+                <option value="jewelry">Jewelry</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+                <option value="electronics">Electronics</option>
+                <option value="dresses">Dresses</option>
+                <option value="house">House</option>
+                <option value="vehicle">Vehicle</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Rent</i></label>
+            <input type="number" class="form-control" name="rent" placeholder="Rent (per day)">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+  </div>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Item added successfully.")
+    document.location = "/add_car"
+    {% endif %}
+</script>
+{% endblock %}
+{% include 'footer.html' %}

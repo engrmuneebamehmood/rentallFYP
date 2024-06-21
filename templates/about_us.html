@@ -1,0 +1,126 @@
+{% include 'header.html' %}
+{% load static %}
+<style>
+    .container {
+        padding: 20px;
+    }
+    .about-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .section-heading {
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+    }
+    .welcome-section {
+        text-align: center;
+    }
+    .column {
+        float: left;
+        width: 50%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .mission-offer-section {
+        background-color: #f2f2f2; /* Add background color */
+        border-radius: 8px; /* Add border radius for a nicer look */
+        padding: 20px;
+    }
+</style>
+<div class="container">
+
+    <div class="column">
+        <div class="about-section welcome-section">
+            <h2 class="section-heading"><strong>About us </strong></h2>
+            <p>A platform that seamlessly connects vendors and customers, allowing you to access products precisely when you need them, without the commitment of ownership or the burden of storage.</p>
+        </div>
+         <!-- Features Area Start -->
+  <section class="features__area pt-20">
+    <div class="container">
+        <div class="row">
+            <!-- First feature item -->
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <img src="{% static 'images/fast rent.JPG' %}" width="50">
+                    </div>
+                    <div class="features__content mt-2">
+                        <h6 class="mb-0">Easy Renting</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Second feature item -->
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <img src="{% static 'images/self pay.JPG' %}" width="50">
+                    </div>
+                    <div class="features__content mt-2">
+                        <h6 class="mb-0">PAYMENT THROUGH EASYPAISA</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Third feature item -->
+            <div class="col">
+                <div class="features__item d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <img src="{% static 'images/message.JPG' %}" width="50">
+                    </div>
+                    <div class="features__content mt-2">
+                        <h6 class="mb-0">24/7 HELP CENTER</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Fourth feature item -->
+            <div class="col">
+                <div class="features_item features_item-last d-flex white-bg">
+                    <div class="features__icon mr-20">
+                        <img src="{% static 'images/friendly.JPG' %}" width="40">
+                    </div>
+                    <div class="features__content mt-2">
+                        <h6 class="mb-0">FRIENDLY SERVICES</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="about-section mission-offer-section">
+                <h2 class="section-heading">Our Mission</h2>
+                <p>We understand the importance of convenience and affordability when it comes to renting items for various purposes. Whether you need vehicles, equipment for an event, or furniture for a temporary space, we've got you covered.</p>
+                <p>Our mission is to make the rental process seamless and hassle-free for both customers and vendors. We provide a user-friendly platform where users can easily browse through a wide range of rental listings, compare prices, and connect with reliable owners.</p>
+                <p>Whether you're a renter looking for the perfect item or an owner wanting to earn extra income by renting out your belongings, Rent All is here to help you make the most of the sharing economy.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="about-section mission-offer-section">
+                <h2 class="section-heading">What We Offer</h2>
+                <ul>
+                    <li>Find a diverse selection of rental items, including electronics, tools, furniture, vehicles, and more.</li>
+                    <li>Connect with vendors who offer high-quality items at competitive prices.</li>
+                    <li>Enjoy convenient payment options through easypaisa.</li>
+                    <li>Access customer support to assist you throughout the rental process.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

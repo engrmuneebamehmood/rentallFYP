@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <title>{% block title %}Rent All{% endblock %}</title>
+ <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    button:hover {
+      opacity: 1;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+   .navbar {
+  background-color: #00b8a8; /* Changed color */
+  font-weight: bolder;
+}
+
+    .navbar-brand {
+      font-weight: bolder;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    .nav-item {
+      margin-left: 15px;
+
+
+    }
+
+    .footer {
+      background-color: #00b8a8;
+      color: #fff;
+      padding: 50px 0;
+    }
+
+    .footer h5 {
+      font-weight: bold;
+    }
+
+    .footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .footer hr {
+      border-color: #fff;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+
+            /* Custom CSS to change the color of the login text */
+    .navbar .dropdown-toggle.nav-link {
+      color: #ffffff; /* dark black color */
+      font-weight: bold;
+    }
+
+
+
+
+
+        /* Ensure all nav links are black */
+    .navbar-nav .nav-link {
+      color: #000000 !important; /* Black */
+    }
+    .navbar-nav .nav-link:hover {
+      color: #000000 !important; /* Black */
+    }
+
+
+
+
+
+
+
+  </style>
+</head>
+ {% load static %}
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid">
+      <!-- Replace text with logo -->
+      <a class="navbar-brand" href="/"><img src="{% static 'images/logorentwebsite.png' %}" alt="Logo"
+          style="height:70px;width:60px;"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+
+
+
+
+
+
+
+
+                 <!-- Improved button part for the login dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                Category
+                </a>
+         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="{% url 'jewelry' %}">Jewelry</a></li>
+              <li><a class="dropdown-item" href="{% url 'dresses' %}">Dresses</a></li>
+              <li><a class="dropdown-item" href="{% url 'electronic' %}">Electronic</a></li>
+              <li><a class="dropdown-item" href="{% url 'books' %}">Books</a></li>
+              <li><a class="dropdown-item" href="{% url 'furniture' %}">Furniture</a></li>
+              <li><a class="dropdown-item" href="{% url 'vehicle' %}">Vehicle</a></li>
+              <li><a class="dropdown-item" href="{% url 'house' %}">House</a></li>
+  </ul>
+</li>
+
+
+
+
+
+
+    <!-- Improved button part for the login dropdown -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    Login
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="/customer_login/">Customer Login</a></li>
+    <li><a class="dropdown-item" href="/car_dealer_login/">Vendor Login</a></li>
+  </ul>
+</li>
+
+
+
+
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

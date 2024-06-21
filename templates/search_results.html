@@ -1,0 +1,90 @@
+{% extends 'customer_navbar.html' %}
+
+{% block title %} Search Results {% endblock %}
+{% load static %}
+
+{% block css %}
+<style>
+    h1 {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.92);
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    th {
+        background-color: rgb(0, 184, 168);
+        color: white;
+    }
+
+    th,
+    td {
+        border: 2px solid #ddd;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if vehicles_list %}
+    <h1 class="mt-4">Available Products</h1>
+    <div class="users-table mt-4">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>City</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Vendor Name</th>
+                    <th>Contact</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in vehicles_list %}
+                <tr>
+                    <td>{{ car.name }}</td>
+                    <td><img src="{{ car.image }}" alt="" width="100px" height="100px"></td>
+                    <td>{{ car.location }}</td>
+                    <td>{{ car.category }}</td>
+                    <td>
+                        {% if car.status == 'Available' %}
+                            <span class="badge bg-success">Available</span>
+                        {% elif car.status == 'On Rent' %}
+                            <span class="badge bg-warning text-dark">On Rent</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Newly Added</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ car.car_dealer }}</td>
+                    <td>
+                        <a href="https://wa.me/{{ car.phone }}?text=I'm%20interested%20in%20your%20{{ car.name }}%20for%20rent" target="_blank" class="whatsapp">
+                            <img src="{% static '/images/whatsapp.png' %}" width="80px" />
+                        </a>
+                    </td>
+                    <td>
+                        {% if car.status != 'On Rent' %}
+                            <form action="/car_rent/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ car.id }}">
+                                <input class="btn btn-dark" type="submit" value="Borrow">
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h2>No Available Items</h2>
+    {% endif %}
+</div>
+{% endblock %}

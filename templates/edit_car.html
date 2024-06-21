@@ -1,0 +1,44 @@
+{% extends 'car_dealer_navbar.html' %}
+{% block title %} Edit Product Detail {% endblock %}
+{% block css %}
+<style>
+    /* Your CSS styles here */
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Edit Product Detail</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="car_id" value="{{ car.id }}">
+        <div class="form-group">
+            <label for="car_name"> Name:</label>
+            <input type="text" class="form-control" id="car_name" name="car_name" value="{{ car.name }}">
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ car.location }}">
+        </div>
+        <div class="form-group">
+            <label for="capacity">Capacity:</label>
+            <input type="text" class="form-control" id="capacity" name="capacity" value="{{ car.capacity }}">
+        </div>
+        <div class="form-group">
+            <label for="rent">Rent:</label>
+            <input type="text" class="form-control" id="rent" name="rent" value="{{ car.rent }}">
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control-file" id="image" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}

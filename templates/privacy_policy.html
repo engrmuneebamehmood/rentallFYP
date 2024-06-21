@@ -1,0 +1,81 @@
+{% include 'header.html' %}
+{% load static %}
+<style>
+    /* Custom CSS styling */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .section-box {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .section-heading {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .contact-info {
+        margin-top: 30px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <center>
+            <h2 class="section-heading"><strong>Privacy Policy</strong></h2>
+            <div class="section-content">
+                <p>We take your privacy seriously and are committed to protecting the personal information you share with us. </p>
+                <p>This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use our website and services.</p>
+            </div>
+        </center>
+
+        <div class="section-box">
+            <center><h3 class="section-heading">Information We Collect</h3></center>
+            <div class="section-content">
+                <p><strong>Customer Information:</strong> When you sign up as a customer, we collect your name, email, phone number, and location.</p>
+                <p><strong>Vendor Information:</strong> If you sign up as a vendor, we collect your name, email, phone number, location, and EasyPaisa number.</p>
+                <p><strong>Transaction Information:</strong> When you borrow a product through our platform, we collect transaction details.</p>
+            </div>
+        </div>
+
+        <!-- Add more section-box divs for each section -->
+
+        <div class="section-box">
+            <center><h3 class="section-heading">User's Data Security</h3></center>
+            <div class="section-content">
+                <p>We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <center><h3 class="section-heading">Third-Party Disclosure</h3></center>
+            <div class="section-content">
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent.</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <center><h3 class="section-heading">Updates to Privacy Policy</h3></center>
+            <div class="section-content">
+                <p>We reserve the right to update this Privacy Policy periodically. Any changes will be posted on this page.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}

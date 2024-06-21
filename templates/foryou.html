@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Recommendations {% endblock %}
+
+{% block css %}
+<style>
+    /* Add any additional CSS styles here */
+</style>
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<div class="container">
+    <center><h1>Recommended Items</h1></center>
+    <div class="row">
+        {% if cars_with_distances_and_status %}
+            {% for car, distance, status in cars_with_distances_and_status %}
+                <div class="col-md-4 mb-4"> <!-- col-md-4 to show 3 items per row, mb-4 for margin -->
+                    <div class="card" style="width: 18rem;">
+                        <p class="card-text"><b>Status:</b> {{ status }}</p>
+                        <img src="/media/{{ car.image }}" class="card-img-top" alt="{{ car.name }}" style="height: 200px;">
+                        <div class="card-body">
+
+                            <h5 class="card-title"><b>{{ car.name }}</b></h5>
+                            <p class="card-text"><b>Category:</b> {{ car.category }}</p>
+                            <p class="card-text"><b>Vendor:</b> {{ car.car_dealer }}</p>
+                            <p class="card-text"><b>Location:</b> {{ car.car_dealer.location.location }}</p>
+                            <p class="card-text"><b>Rent:</b> Rs {{ car.rent }} per day</p>
+                            <p class="card-text"><b>Contact:</b> {{ car.car_dealer.phone }}</p>
+                            <p class="card-text"><b>EasyPaisa Number:</b> {{ car.car_dealer.easypaisa_number }}</p>
+                            <a href="https://wa.me/{{ car.car_dealer.easypaisa_number }}?text=I'm%20interested%20in%20your%20{{ car.name }}%20for%20rent" target="_blank" class="whatsapp">
+                                <img src="{% static '/images/whatsapp.png' %}" width="80px" />
+                            </a>
+                            {% if login %}
+                                {% if distance %}
+                                    <p class="card-text">
+                                        <b>
+                                            {% if distance == 0 %}
+                                                Distance: Same City
+                                            {% else %}
+                                                Distance: {{ distance }} km
+                                            {% endif %}
+                                        </b>
+                                    </p>
+                                    <form action="/car_rent/" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{ car.id }}">
+                                        <input class="btn btn-dark" type="submit" value="Borrow">
+                                    </form>
+                                {% else %}
+                                    <a href="{% url 'customer_login' %}" class="btn btn-primary">Login to Borrow</a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'customer_login' %}" class="btn btn-primary">Login to Borrow</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    </div><div class="row"> <!-- Close and reopen row after every 3 items -->
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="col">
+                <h2>No recommendations available at the moment.</h2>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% include 'header.html' %}
+{% load static %}
+<style>
+    .container {
+        padding: 20px;
+    }
+    .terms-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .section-heading {
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+    }
+    .column {
+        float: left;
+        width: 100%; /* Adjust the width as needed */
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <div class="terms-section">
+                <center><h2 class="section-heading"><strong>Terms of Service</strong></h2></center>
+                <p>Welcome to Rent All! By accessing our website, you agree to comply with and be bound by the following terms and conditions of use, which together with our Privacy Policy govern Rent Everything's relationship with you in relation to this website.</p>
+
+                <p>If you have any questions about our Terms of Service, please <a href="{% url 'contact_us' %}">contact us</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <div class="terms-section">
+                <h2 class="section-heading">Here is the list of our Terms of Services:</h2>
+
+                <ol>
+                    <li><strong>Acceptance of Terms</strong> - By accessing or using our website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our services.</li>
+                    <li><strong>User Eligibility</strong> - You must be of legal age and capacity to enter into this agreement. By using our services, you represent and warrant that you meet the eligibility requirements.</li>
+                    <li><strong>User Accounts</strong> - To access certain features of our platform, you may be required to create an account. You are responsible for maintaining the security of your account and password. We reserve the right to suspend or terminate accounts that violate these Terms.</li>
+                    <li><strong>Listing and Booking</strong> - Our platform allows users to list rental properties and make bookings. Hosts and guests are responsible for the accuracy of listings, bookings, and payments. Cancellation policies and fees may apply to bookings.</li>
+                    <li><strong>Content Guidelines</strong> - Users are prohibited from posting illegal, offensive, or misleading content. We reserve the right to remove or moderate content that violates our guidelines.</li>
+                    <li><strong>Intellectual Property</strong> - All intellectual property rights related to our platform are owned by us. Users are prohibited from using or reproducing our content without permission.</li>
+                    <li><strong>Privacy Policy</strong> - Our Privacy Policy governs the collection, use, and protection of user data. By using our services, you consent to the terms of our Privacy Policy.</li>
+                    <li><strong>Disclaimer of Liability</strong> - We are not responsible for the accuracy, quality, or legality of listings or transactions between users. We disclaim liability for any damages or losses resulting from the use of our platform.</li>
+                    <li><strong>Termination</strong> - We reserve the right to terminate or suspend accounts for violations of these Terms. Users may terminate their accounts at any time.</li>
+                    <li><strong>Changes to the Terms</strong> - We reserve the right to modify or update these Terms at any time. Users will be notified of changes, and continued use of our services constitutes acceptance of the updated Terms.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

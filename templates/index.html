@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% block title %}Rent All{% endblock %}
+{% block css %}
+{% load static %}
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+    .mt-4 {
+        margin-top: 20px;
+    }
+    .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+    }
+
+
+  /* Chatbot Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; /* Prevent scrolling */
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+         background-color: #fefefe;
+    margin: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 0;
+    border: 1px solid #888;
+    width: 375px;
+    max-width: 375px;
+    height: 667px;
+    border-radius: 40px;
+    overflow: hidden;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 10px;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+    .phone {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        }
+
+     .screen {
+            flex: 1;
+            background-color: #fff;
+            overflow-y: hidden; /* Prevent scrolling */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+    .chat-container {
+        flex: 1;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .chat-msg {
+        max-width: 70%;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+    }
+    .bot-msg {
+        background-color: #d3e8fd;
+        color: #000;
+        align-self: flex-start;
+    }
+    .user-msg {
+        background-color: #4fd1c5;
+        color: #fff;
+        align-self: flex-end;
+    }
+    .input-container {
+        background-color: #fff;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #ccc;
+
+    }
+    input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        margin-right: 10px;
+        outline: none;
+    }
+
+      button {
+
+            padding: 10px 20px;
+            border: none;
+            background-color: #4fd1c5;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            outline: none;
+        }
+
+
+
+
+
+
+
+
+
+</style>
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6" style="margin-top: 5%;">
+            <h1 class="display-3" style="font-size: 4rem;">RENT ALL</h1>
+            <p class="display-5" style="font-size: 1 rem;"> A platform that connects vendors & customers</p>
+                <p class="lead" style="font-size: 1.2rem;">  Browse through our extensive collection of items, including tools, equipment, party supplies, electronics, and more. With our convenient rental payment options through easypaisa, you can access items without the hassle of purchasing and storing them.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'images/homepage.JPG' %}" alt="Image" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+<!-- Boxed Features Area -->
+<div class="container mt-4">
+    <div class="border rounded p-1 border-primary">
+        <!-- features__area-start -->
+        <section class="features__area pt-20">
+            <div class="container">
+                <div class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 row-cols-1 gx-0">
+                    <!-- Features items -->
+                    <div class="col">
+                        <div class="features__item d-flex white-bg">
+                            <div class="features__icon mr-20">
+                                <img src="{% static 'images/fast rent.JPG' %}" width="50">
+                            </div>
+                            <div class="features__content">
+                                <h6>Easy Renting</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="features__item d-flex white-bg">
+                            <div class="features__icon mr-20">
+                                <img src="{% static 'images/self pay.JPG' %}" width="50">
+                            </div>
+                            <div class="features__content">
+                                <h6>PAYMENT THROUGH EASYPAISA</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="features__item d-flex white-bg">
+                            <div class="features__icon mr-20">
+                                <img src="{% static 'images/message.JPG' %}" width="50">
+                            </div>
+                            <div class="features__content">
+                                <h6>24/7 HELP CENTER</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="features_item features_item-last d-flex white-bg">
+                            <div class="features__icon mr-20">
+                                <img src="{% static 'images/friendly.JPG' %}" width="40">
+                            </div>
+                            <div class="features__content">
+                                <h6>FRIENDLY SERVICES</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- features__area-end -->
+    </div>
+</div>
+<!-- End of Boxed Features Area -->
+
+<!-- Product Heading -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center mb-4 bold-black">OUR PRODUCTS</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        {% for car, distance, status in cars_with_distances_and_status %}
+        {% if forloop.counter <= 3 %}
+        <div class="col-sm-4 mt-4">
+            <div class="card" style="width: 20rem;">
+                   <p class="card-text"><b>Status:</b> {{ status }}</p>
+                <img class="card-img-top" src="/media/{{car.image}}" alt="Card image cap" style="height: 180px;">
+
+                <div class="card-body">
+
+                    <h5 class="card-title"><b><center>{{car.name}}</center></b></h5>
+                    <h6 class="card-text"><b>Category:</b> {{car.category}}</h6>
+
+                    <h6 class="card-text"><b>Vendor:</b> {{car.car_dealer}}</h6>
+                    <h6 class="card-text"><b>Location: </b>{{car.car_dealer.location}}</b></h6>
+                    <p class="card-text"><b>Rent:</b> Rs {{car.rent}} per day</p>
+                    <p class="card-text"><b>Contact:</b> {{ car.car_dealer.phone }}</p>
+                    <p class="card-text"><b>EasyPaisa Number: </b>{{ car.car_dealer.easypaisa_number }}</p>
+                    {% if login %}
+                        <p class="card-text">
+                            <b>
+                                {% if distance < 10 %}
+                                    Distance: Same City
+                                {% else %}
+                                    Distance: {{ distance }} km
+                                {% endif %}
+                            </b>
+                        </p>
+                    {% endif %}
+                    <a href="https://wa.me/{{ car.car_dealer.easypaisa_number  }}?text=I'm%20interested%20in%20your%20{{car.name}}%20for%20rent" target="_blank" class="whatsapp">
+                        <img src="{% static '/images/whatsapp.png' %}" width="80px" />
+                    </a>
+                    {% if login == True %}
+                        <form action="/car_rent/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{car.id}}">
+                            <input class="btn btn-dark" type="submit" value="Borrow">
+                        </form>
+                    {% else %}
+                        <a href="{% url 'customer_login' %}" class="btn btn-primary">Login to  Borrow</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- See More Button -->
+{% if cars|length < 3 %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="{% url 'see_more' %}" class="btn btn-primary">See More</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+<!-- Chatbot Icon -->
+<img src="{% static 'images/chatbot-icon.JPG.png' %}" alt="Chatbot Icon" class="chatbot-icon" onclick="openChatbot()">
+
+<!-- Chatbot Modal -->
+<div id="chatbotModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeChatbot()">&times;</span>
+        <div class="phone">
+            <div class="screen">
+                <div class="chat-container" id="chat-container">
+                    <div class="chat-msg bot-msg">Hi, I'm your rental website assistant. How can I help you today?</div>
+                </div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button  onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chatbot JavaScript -->
+<script>
+    function openChatbot() {
+        document.getElementById('chatbotModal').style.display = 'block';
+    }
+
+    function closeChatbot() {
+        document.getElementById('chatbotModal').style.display = 'none';
+    }
+
+    function sendMessage() {
+        var userInput = document.getElementById("user-input").value;
+        if (userInput.trim() !== "") {
+            addMessage(userInput, "user-msg");
+            document.getElementById("user-input").value = "";
+            sendToChatbot(userInput);
+        }
+    }
+
+    function addMessage(message, className) {
+        var chatContainer = document.getElementById("chat-container");
+        var msgDiv = document.createElement("div");
+        msgDiv.textContent = message;
+        msgDiv.classList.add("chat-msg", className);
+        chatContainer.appendChild(msgDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function sendToChatbot(userInput) {
+        fetch('/chatbot/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ user_input: userInput })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => { throw new Error(data.error) });
+            }
+            return response.json();
+        })
+        .then(data => addMessage(data.response, 'bot-msg'))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        var cookieName = name + '=';
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var cookieArray = decodedCookie.split(';');
+        for(var i = 0; i < cookieArray.length; i++) {
+            var cookie = cookieArray[i].trim();
+            if (cookie.indexOf(cookieName) === 0) {
+                cookieValue = cookie.substring(cookieName.length, cookie.length);
+                break;
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}
+

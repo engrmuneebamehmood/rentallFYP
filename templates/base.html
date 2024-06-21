@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <title>{% block title %}Rent All{% endblock %}</title>
+  <style>
+    /* Your existing CSS styles */
+    /* Ensure all nav links are black */
+    .navbar-nav .nav-link {
+      color: #000000 !important; /* Black */
+    }
+    .navbar-nav .nav-link:hover {
+      color: #000000 !important; /* Black */
+
+    }
+  </style>
+  {% block css %}{% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><img src="{% static 'images//logorentwebsite.png' %}" alt="Logo"
+          style="height:70px;width:60px;"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <!-- Display username -->
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" style="text-decoration: none; color: #ffffff; font-size: 20px;">
+                Welcome {{ request.user }}
+              </a>
+            </li>
+          {% endif %}
+          <!-- Common navigation links -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          {% if request.path != '/foryou/' %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/foryou/">Foryou</a>
+            </li>
+          {% endif %}
+
+          <!-- Category Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Category
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'jewelry' %}">Jewelry</a></li>
+              <li><a class="dropdown-item" href="{% url 'dresses' %}">Dresses</a></li>
+              <li><a class="dropdown-item" href="{% url 'electronic' %}">Electronic</a></li>
+              <li><a class="dropdown-item" href="{% url 'books' %}">Books</a></li>
+              <li><a class="dropdown-item" href="{% url 'furniture' %}">Furniture</a></li>
+              <li><a class="dropdown-item" href="{% url 'vehicle' %}">Vehicle</a></li>
+              <li><a class="dropdown-item" href="{% url 'house' %}">House</a></li>
+            </ul>
+          </li>
+
+          {% if request.user.is_authenticated %}
+            {% if request.user.customer %}
+              <!-- Dropdown menu for customers -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="customerDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Others
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+                  <li><a class="dropdown-item" href="/customer_homepage/">Search</a></li>
+                  <li><a class="dropdown-item" href="/see_more">All Products</a></li>
+                  <li><a class="dropdown-item" href="/past_orders/">Past Orders</a></li>
+                  <li><a class="dropdown-item" href="/recommendation/">Recommendation</a></li>
+                  <li><a class="dropdown-item" href="/signout/">Signout</a></li>
+                </ul>
+              </li>
+            {% elif request.user.cardealer %}
+              <!-- Dropdown menu for car dealers -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dealerDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Others
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dealerDropdown">
+                  <li><a class="dropdown-item" href="/all_cars/">All Item</a></li>
+                  <li><a class="dropdown-item" href="/add_car/">Add Item</a></li>
+                  <li><a class="dropdown-item" href="/all_orders/">Orders</a></li>
+                  <li><a class="dropdown-item" href="/earnings/">Earnings</a></li>
+                  <li><a class="dropdown-item" href="/signout/">Signout</a></li>
+                </ul>
+              </li>
+            {% endif %}
+          {% else %}
+            <!-- Login dropdown menu for non-logged-in users -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Login
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                <li><a class="dropdown-item" href="/customer_login/">Customer Login</a></li>
+                <li><a class="dropdown-item" href="/car_dealer_login/">Vendor Login</a></li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  {% block body %}
+  {% endblock %}
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      {% include 'footer.html' %}
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+  </script>
+  {% block js %}{% endblock %}
+</body>
+</html>
