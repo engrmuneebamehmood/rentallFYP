@@ -1,0 +1,1 @@
+web: gunicorn Amna.wsgi. --log.file -
